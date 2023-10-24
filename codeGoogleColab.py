@@ -1,9 +1,11 @@
-# TEST
 # Loading audio from a computer
 # Audio files up to 25 MB in size are supported, in one of the formats: mp3, mp4, mpeg, mpga, m4a, wav, or webm
 
-from google.colab import files
-uploaded = files.upload()
+import gdown
+google_drive_file_id = 'Google_Drive_file_ID'
+google_drive_url = f'https://drive.google.com/uc?id={google_drive_file_id}'
+audio_file_name = 'audioFileName.mp3'  # Change this to match your desired file format
+gdown.download(google_drive_url, audio_file_name, quiet=False)
 
 
 # OpenAi library
@@ -19,7 +21,7 @@ openai.api_key = API_KEY
 
 model_id = 'whisper-1'
 
-media_file_path = list(uploaded.keys())[0]
+media_file_path = audio_file_name
 media_file = open(media_file_path, 'rb')
 
 response_0 = openai.Audio.transcribe(
